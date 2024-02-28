@@ -114,7 +114,8 @@ app.get('/api/constructors/:ref', async (req, res) => {
 
 //the constructors within a given season
 //input - year
-
+//REMOVED FROM ASSIGNMENT
+/*
 app.get('/api/constructors/season/:year', async (req, res) => {
     const {data, error} = await supabase
     .from('races')
@@ -127,7 +128,7 @@ app.get('/api/constructors/season/:year', async (req, res) => {
     
     res.send(data);
 });
-
+*/
 //all the drivers
 
 app.get('/api/drivers', async (req, res) => {
@@ -176,7 +177,8 @@ app.get('/api/drivers/search/:substring', async (req, res) => {
 
 //the drivers within a given season
 //input - year
-
+//REMOVED FROM ASSIGNMENT
+/*
 app.get('/api/drivers/season/:year', async (req, res) => {
     const {data, error} = await supabase
     .from('races')
@@ -189,7 +191,7 @@ app.get('/api/drivers/season/:year', async (req, res) => {
     
     res.send(data);
 });
-
+*/
 //the drivers within a given race
 //input - raceId
 

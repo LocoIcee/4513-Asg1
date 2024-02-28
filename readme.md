@@ -3,15 +3,13 @@ https://four513-asg1.onrender.com/api/circuits
 https://four513-asg1.onrender.com/api/circuits/monza  
 https://four513-asg1.onrender.com/api/circuits/calgary  
 https://four513-asg1.onrender.com/api/constructors  
-https://four513-asg1.onrender.com/api/constructors/ferrari  
-https://four513-asg1.onrender.com/api/constructors/season/2020  
+https://four513-asg1.onrender.com/api/constructors/ferrari   
 https://four513-asg1.onrender.com/api/drivers  
 https://four513-asg1.onrender.com/api/drivers/Norris  
 https://four513-asg1.onrender.com/api/drivers/norris  
 https://four513-asg1.onrender.com/api/drivers/connolly  
 https://four513-asg1.onrender.com/api/drivers/search/sch  
 https://four513-asg1.onrender.com/api/drivers/search/xxxxx  
-https://four513-asg1.onrender.com/api/drivers/season/2022  
 https://four513-asg1.onrender.com/api/drivers/race/1069  
 https://four513-asg1.onrender.com/api/races/1034  
 https://four513-asg1.onrender.com/api/races/season/2021   

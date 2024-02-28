@@ -1,9 +1,27 @@
+/*
+ Author:
+ Cameron Hill
+ 
+ Description:
+ 
+ This Express application provides a RESTful API to interact with a Supabase
+ database containing information related to f1 motorsports. This information
+ includes seasons, circuits, constructors, drivers, races, results, qualifying,
+ driver standings, and constructor standings.
+ 
+ */
+
 const express = require('express');
 const supa = require('@supabase/supabase-js');
 const app = express();
 const supaUrl = 'https://lrbjrjracaaexrcdlwch.supabase.co';
 const supaAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxyYmpyanJhY2FhZXhyY2Rsd2NoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDg0ODM1MTcsImV4cCI6MjAyNDA1OTUxN30.t42nh4V9AdejI61JD_8eKGPxurBuY7hbu_XFKFxsvPg';
 const supabase = supa.createClient(supaUrl, supaAnonKey);
+
+/*
+ Below are the different api routes
+ */
+// all the seasons
 
 app.get('/api/seasons', async (req, res) => {
     const {data, error} = await supabase
@@ -17,6 +35,8 @@ app.get('/api/seasons', async (req, res) => {
     res.send(data);
 });
 
+//all the circuits
+
 app.get('/api/circuits', async (req, res) => {
     const {data, error} = await supabase
     .from('circuits')
@@ -28,6 +48,9 @@ app.get('/api/circuits', async (req, res) => {
     
     res.send(data);
 });
+
+//just the specified circuit
+//input - circuitRef - character insensitive
 
 app.get('/api/circuits/:ref', async (req, res) => {
     const {data, error} = await supabase
@@ -41,6 +64,9 @@ app.get('/api/circuits/:ref', async (req, res) => {
     
     res.send(data);
 });
+
+//the circuits used in a given season
+//input - year
 
 app.get('/api/circuits/season/:year', async (req, res) => {
     const {data, error} = await supabase
@@ -56,6 +82,8 @@ app.get('/api/circuits/season/:year', async (req, res) => {
     res.send(data);
 });
 
+//all the constructors
+
 app.get('/api/constructors', async (req, res) => {
     const {data, error} = await supabase
     .from('constructors')
@@ -67,6 +95,9 @@ app.get('/api/constructors', async (req, res) => {
     
     res.send(data);
 });
+
+//just the specified constructor
+//input - constructorRef - character insensitive
 
 app.get('/api/constructors/:ref', async (req, res) => {
     const {data, error} = await supabase
@@ -81,6 +112,9 @@ app.get('/api/constructors/:ref', async (req, res) => {
     res.send(data);
 });
 
+//the constructors within a given season
+//input - year
+
 app.get('/api/constructors/season/:year', async (req, res) => {
     const {data, error} = await supabase
     .from('races')
@@ -94,6 +128,8 @@ app.get('/api/constructors/season/:year', async (req, res) => {
     res.send(data);
 });
 
+//all the drivers
+
 app.get('/api/drivers', async (req, res) => {
     const {data, error} = await supabase
     .from('drivers')
@@ -105,6 +141,9 @@ app.get('/api/drivers', async (req, res) => {
     
     res.send(data);
 });
+
+//just the specified driver
+//input - driverRef - character insensitive
 
 app.get('/api/drivers/:ref', async (req, res) => {
     const {data, error} = await supabase
@@ -119,6 +158,9 @@ app.get('/api/drivers/:ref', async (req, res) => {
     res.send(data);
 });
 
+//the drivers whose surname begins with the substring
+//input - surname - character insensitive
+
 app.get('/api/drivers/search/:substring', async (req, res) => {
     const {data, error} = await supabase
     .from('drivers')
@@ -131,6 +173,9 @@ app.get('/api/drivers/search/:substring', async (req, res) => {
     
     res.send(data);
 });
+
+//the drivers within a given season
+//input - year
 
 app.get('/api/drivers/season/:year', async (req, res) => {
     const {data, error} = await supabase
@@ -145,6 +190,9 @@ app.get('/api/drivers/season/:year', async (req, res) => {
     res.send(data);
 });
 
+//the drivers within a given race
+//input - raceId
+
 app.get('/api/drivers/race/:raceId', async (req, res) => {
     const {data, error} = await supabase
     .from('qualifying')
@@ -158,6 +206,9 @@ app.get('/api/drivers/race/:raceId', async (req, res) => {
     res.send(data);
 });
 
+//the specified race
+//input - raceId
+
 app.get('/api/races/:raceId', async (req, res) => {
     const {data, error} = await supabase
     .from('races')
@@ -170,6 +221,9 @@ app.get('/api/races/:raceId', async (req, res) => {
     
     res.send(data);
 });
+
+//the races within a given season ordered by round
+//input - year
 
 app.get('/api/races/season/:year', async (req, res) => {
     const {data, error} = await supabase
@@ -185,6 +239,9 @@ app.get('/api/races/season/:year', async (req, res) => {
     res.send(data);
 });
 
+//a race specified by the round within a given season
+//input - year, round
+
 app.get('/api/races/season/:year/:round', async (req, res) => {
     const {data, error} = await supabase
     .from('races')
@@ -199,6 +256,9 @@ app.get('/api/races/season/:year/:round', async (req, res) => {
     res.send(data);
 });
 
+//all races for a given circuit
+//input - ciruitRef - character insensitive
+
 app.get('/api/races/circuits/:ref', async (req, res) => {
     const {data, error} = await supabase
     .from('races')
@@ -212,6 +272,9 @@ app.get('/api/races/circuits/:ref', async (req, res) => {
     
     res.send(data);
 });
+
+//all the races for a given circuit between two years
+//input - ciruitRef, start 'year', end 'year'
 
 app.get('/api/races/circuits/:ref/season/:start/:end', async (req, res) => {
     if (yearError(req.params.start, req.params.end, res)){
@@ -233,6 +296,9 @@ app.get('/api/races/circuits/:ref/season/:start/:end', async (req, res) => {
     res.send(data);
 });
 
+//results for the specified race
+//input - raceId
+
 app.get('/api/results/:raceId', async (req, res) => {
     const {data, error} = await supabase
     .from('results')
@@ -247,6 +313,9 @@ app.get('/api/results/:raceId', async (req, res) => {
     res.send(data);
 });
 
+//all results for a given driver
+//input - driverRef
+
 app.get('/api/results/driver/:ref', async (req, res) => {
     const {data, error} = await supabase
     .from('results')
@@ -259,6 +328,9 @@ app.get('/api/results/driver/:ref', async (req, res) => {
     
     res.send(data);
 });
+
+//all results for a given driver between two years
+//input - driverRef, start 'year', end 'year'
 
 app.get('/api/results/drivers/:ref/seasons/:start/:end', async (req, res) => {
     if (yearError(req.params.start, req.params.end, res)){
@@ -279,6 +351,9 @@ app.get('/api/results/drivers/:ref/seasons/:start/:end', async (req, res) => {
     res.send(data);
 });
 
+//qualifying results for the specified race
+//input - raceId
+
 app.get('/api/qualifying/:raceId', async (req, res) => {
     const {data, error} = await supabase
     .from('qualifying')
@@ -292,6 +367,10 @@ app.get('/api/qualifying/:raceId', async (req, res) => {
     
     res.send(data);
 });
+
+//the current season driver standings table for the specified race sorted by
+//position
+//input - raceId
 
 app.get('/api/standings/drivers/:raceId', async (req, res) => {
     const {data, error} = await supabase
@@ -307,6 +386,10 @@ app.get('/api/standings/drivers/:raceId', async (req, res) => {
     res.send(data);
 });
 
+//the current season contructors standings table for the specified race sorted by
+//position
+//input - raceId
+
 app.get('/api/standings/constructors/:raceId', async (req, res) => {
     const {data, error} = await supabase
     .from('constructorStandings')
@@ -321,6 +404,8 @@ app.get('/api/standings/constructors/:raceId', async (req, res) => {
     res.send(data);
 });
 
+//function to do the error handling for each api
+
 const handleErrors = (res, error, data) => {
     if (error) {
         res.status(500).json({ error: 'invalid request' });
@@ -332,6 +417,9 @@ const handleErrors = (res, error, data) => {
     }
     return false;
 };
+
+//function that detects the error when the end year is less than the start year
+//for the api's that use start and end years
 
 const yearError = (start, end, res) => {
     if (start>end) {

@@ -332,7 +332,7 @@ app.get('/api/results/driver/:ref', async (req, res) => {
 //all results for a given driver between two years
 //input - driverRef, start 'year', end 'year'
 
-app.get('/api/results/drivers/:ref/seasons/:start/:end', async (req, res) => {
+app.get('/api/results/driver/:ref/seasons/:start/:end', async (req, res) => {
     if (yearError(req.params.start, req.params.end, res)){
         return
     }
@@ -372,7 +372,7 @@ app.get('/api/qualifying/:raceId', async (req, res) => {
 //position
 //input - raceId
 
-app.get('/api/standings/drivers/:raceId', async (req, res) => {
+app.get('/api/standings/:raceId/drivers', async (req, res) => {
     const {data, error} = await supabase
     .from('driverStandings')
     .select(`driverStandingsId, raceId, drivers (driverRef, code, forename, surname), points, position, positionText, wins`)
@@ -390,7 +390,7 @@ app.get('/api/standings/drivers/:raceId', async (req, res) => {
 //position
 //input - raceId
 
-app.get('/api/standings/constructors/:raceId', async (req, res) => {
+app.get('/api/standings/:raceId/constructors', async (req, res) => {
     const {data, error} = await supabase
     .from('constructorStandings')
     .select(`constructorStandingsId, raceId, constructors (name, constructorRef, nationality), points, position, positionText, wins`)

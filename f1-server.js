@@ -260,7 +260,7 @@ app.get('/api/results/driver/:ref', async (req, res) => {
     res.send(data);
 });
 
-app.get('/api/results/driver/:ref/seasons/:start/:end', async (req, res) => {
+app.get('/api/results/drivers/:ref/seasons/:start/:end', async (req, res) => {
     if (yearError(req.params.start, req.params.end, res)){
         return
     }

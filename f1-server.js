@@ -33,7 +33,7 @@ app.get('/api/circuits/:ref', async (req, res) => {
     const {data, error} = await supabase
     .from('circuits')
     .select()
-    .eq('circuitRef', req.params.ref);
+    .ilike('circuitRef', req.params.ref);
     
     if (handleErrors(res, error, data)) {
         return;
@@ -72,7 +72,7 @@ app.get('/api/constructors/:ref', async (req, res) => {
     const {data, error} = await supabase
     .from('constructors')
     .select()
-    .eq('constructorRef', req.params.ref);
+    .ilike('constructorRef', req.params.ref);
     
     if (handleErrors(res, error, data)) {
         return;
@@ -110,7 +110,7 @@ app.get('/api/drivers/:ref', async (req, res) => {
     const {data, error} = await supabase
     .from('drivers')
     .select()
-    .eq('driverRef', req.params.ref);
+    .ilike('driverRef', req.params.ref);
     
     if (handleErrors(res, error, data)) {
         return;
@@ -203,7 +203,7 @@ app.get('/api/races/circuits/:ref', async (req, res) => {
     const {data, error} = await supabase
     .from('races')
     .select(`*, circuits!inner (circuitRef)`)
-    .eq('circuits.circuitRef', req.params.ref)
+    .ilike('circuits.circuitRef', req.params.ref)
     .order('year', { ascending: true });
     
     if (handleErrors(res, error, data)) {
@@ -221,7 +221,7 @@ app.get('/api/races/circuits/:ref/season/:start/:end', async (req, res) => {
     const {data, error} = await supabase
     .from('races')
     .select(`*, circuits!inner (circuitRef)`)
-    .eq('circuits.circuitRef', req.params.ref)
+    .ilike('circuits.circuitRef', req.params.ref)
     .gte('year', req.params.start)
     .lte('year', req.params.end)
     .order('year', { ascending: true });
@@ -251,7 +251,7 @@ app.get('/api/results/driver/:ref', async (req, res) => {
     const {data, error} = await supabase
     .from('results')
     .select(`*, drivers!inner (driverRef)`)
-    .eq('drivers.driverRef', req.params.ref);
+    .ilike('drivers.driverRef', req.params.ref);
     
     if (handleErrors(res, error, data)) {
         return;
@@ -268,7 +268,7 @@ app.get('/api/results/driver/:ref/seasons/:start/:end', async (req, res) => {
     const {data, error} = await supabase
     .from('results')
     .select(`*, drivers!inner (driverRef), races!inner (year)`)
-    .eq('drivers.driverRef', req.params.ref)
+    .ilike('drivers.driverRef', req.params.ref)
     .gte('races.year', req.params.start)
     .lte('races.year', req.params.end);
     
@@ -323,7 +323,7 @@ app.get('/api/standings/constructors/:raceId', async (req, res) => {
 
 const handleErrors = (res, error, data) => {
     if (error) {
-        res.status(500).json({ error: 'An error has occured' });
+        res.status(500).json({ error: 'invalid request' });
         return true;
     }
     if (!data || data.length === 0) {

@@ -19,7 +19,7 @@ const supaUrl = 'https://lrbjrjracaaexrcdlwch.supabase.co';
 const supaAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxyYmpyanJhY2FhZXhyY2Rsd2NoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDg0ODM1MTcsImV4cCI6MjAyNDA1OTUxN30.t42nh4V9AdejI61JD_8eKGPxurBuY7hbu_XFKFxsvPg';
 const supabase = supa.createClient(supaUrl, supaAnonKey);
 
-const whitelist = ['https://four513-asg1.onrender.com']
+const whitelist = ['https://four513-asg2.onrender.com']
 const corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {

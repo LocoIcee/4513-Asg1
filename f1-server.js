@@ -31,7 +31,7 @@ const corsOptions = {
 }
 
 // Then pass them to cors:
-app.use(cors(corsOptions));
+app.use(cors());
 
 /*
  Below are the different api routes
